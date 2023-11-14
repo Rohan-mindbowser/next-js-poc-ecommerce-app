@@ -1,10 +1,13 @@
+import Link from "next/link";
 import React from "react";
 import { FaCartShopping } from "react-icons/fa6";
 
 const Product = ({ product }: any) => {
   return (
-    <div className="w-full flex flex-col bg-gray-900 p-2 rounded-md">
-      <img src={product?.images[0]}></img>
+    <div className="w-full flex flex-col bg-gray-50 p-2 rounded-md shadow">
+      <Link href={`/pages/product/${product?.id}`}>
+        <img src={product?.images[0]} className="cursor-pointer"></img>
+      </Link>
       <span className="text-xl">{product?.title}</span>
       <div className="flex justify-between items-center">
         <div>
