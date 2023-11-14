@@ -16,7 +16,7 @@ const viewProduct = () => {
   return (
     <div className="p-2 sm:px-8 sm:py-6 w-full flex justify-center">
       {product && (
-        <div className="flex flex-wrap gap-x-6 max-w-7xl">
+        <div className="flex flex-wrap gap-x-6 max-w-7xl sm:p-16">
           <div className="w-full sm:w-2/3">
             <img src={product?.images[0]} className="w-full"></img>
             <div className="grid grid-cols-2 max-h-40 gap-4 mt-4">
