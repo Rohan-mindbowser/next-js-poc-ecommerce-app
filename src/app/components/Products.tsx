@@ -17,7 +17,7 @@ const Products = () => {
     getAllProducts();
   }, []);
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-6xl p-4 mt-16">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-6xl p-4 pt-16 mx-auto">
       {products?.map((item: any) => {
         return (
           <div className="w-full" key={item?.id}>

@@ -3,11 +3,13 @@ import React from "react";
 import { FiHeart } from "react-icons/fi";
 import { AiOutlineShopping } from "react-icons/ai";
 
-const navLinks: string[] = ["New & Featured", "Men", "Women", "Kids", "SNKRS"];
+const navLinks: { label: string; value: string }[] = [
+  { label: "New & Featured", value: "/pages/latestproducts" },
+];
 
 const Navbar = () => {
   return (
-    <div className="p-2 sm:px-8 py-4 flex justify-between items-center fixed bg-white w-full shadow">
+    <div className="p-2 sm:px-8 py-4 flex justify-between items-center fixed bg-white w-full shadow z-[999]">
       <Link href="/" className="font-bold sm:text-xl">
         E-shop
       </Link>
@@ -16,10 +18,10 @@ const Navbar = () => {
           {navLinks?.map((link) => {
             return (
               <Link
-                href="#"
+                href={link?.value}
                 className="relative w-fit block after:block after:content-[''] after:absolute after:h-[3px] after:bg-black after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
               >
-                {link}
+                {link?.label}
               </Link>
             );
           })}

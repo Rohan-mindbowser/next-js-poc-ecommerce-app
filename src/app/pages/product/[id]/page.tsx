@@ -1,4 +1,5 @@
 "use client";
+import ProductSlider from "@/app/components/ProductSlider";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -19,7 +20,7 @@ const viewProduct = () => {
         <div className="flex flex-wrap gap-x-6 max-w-7xl sm:p-16">
           <div className="w-full sm:w-2/3">
             <img src={product?.images[0]} className="w-full"></img>
-            <div className="grid grid-cols-2 max-h-40 gap-4 mt-4">
+            <div className="grid grid-cols-2 gap-4 mt-4">
               <img src={product?.images[1]} className="hidden sm:block"></img>
               <img src={product?.images[2]} className="hidden sm:block"></img>
             </div>
@@ -52,6 +53,7 @@ const viewProduct = () => {
           </div>
         </div>
       )}
+      <ProductSlider />
     </div>
   );
 };
