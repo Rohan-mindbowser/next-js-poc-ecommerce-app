@@ -53,7 +53,7 @@ const viewProduct = () => {
           </div>
         </div>
       )}
-      <ProductSlider />
+      {/* <ProductSlider /> */}
     </div>
   );
 };

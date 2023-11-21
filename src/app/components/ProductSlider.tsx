@@ -24,21 +24,7 @@ const responsive = {
   },
 };
 
-const ProductSlider = () => {
-  const [products, setProducts] = useState([]);
-
-  const getAllProducts = async () => {
-    const data = await fetch(
-      "https://api.escuelajs.co/api/v1/products?offset=27&limit=9"
-    );
-    const res = await data.json();
-    setProducts(res);
-  };
-
-  useEffect(() => {
-    getAllProducts();
-  }, []);
-
+const ProductSlider = ({ products }: any) => {
   return (
     <Carousel
       swipeable={false}

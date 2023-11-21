@@ -1,8 +1,23 @@
+"use client";
 import ProductSlider from "@/app/components/ProductSlider";
+import Trending from "@/app/components/Trending";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const page = () => {
+  const [products, setProducts] = useState([]);
+
+  const getAllProducts = async () => {
+    const data = await fetch(
+      "https://api.escuelajs.co/api/v1/products?offset=17&limit=9"
+    );
+    const res = await data.json();
+    setProducts(res);
+  };
+
+  useEffect(() => {
+    getAllProducts();
+  }, []);
   return (
     <div className="p-2 sm:px-8">
       <Image
@@ -13,7 +28,8 @@ const page = () => {
         style={{ width: "100%", height: "auto" }} // optional
         alt="home image"
       />
-      <ProductSlider />
+      <ProductSlider products={products} />
+      <Trending products={products} />
     </div>
   );
 };
