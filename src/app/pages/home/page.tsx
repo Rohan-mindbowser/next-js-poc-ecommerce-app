@@ -9,7 +9,7 @@ const page = () => {
 
   const getAllProducts = async () => {
     const data = await fetch(
-      "https://api.escuelajs.co/api/v1/products?offset=17&limit=9"
+      "https://api.escuelajs.co/api/v1/products?offset=0&limit=9"
     );
     const res = await data.json();
     setProducts(res);

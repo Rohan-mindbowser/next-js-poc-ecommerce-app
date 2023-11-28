@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Product from "./Product";
 
 const Products = () => {
@@ -7,7 +7,7 @@ const Products = () => {
 
   const getAllProducts = async () => {
     const data = await fetch(
-      "https://api.escuelajs.co/api/v1/products?offset=7&limit=16"
+      "https://api.escuelajs.co/api/v1/products?offset=0&limit=36"
     );
     const res = await data.json();
     setProducts(res);

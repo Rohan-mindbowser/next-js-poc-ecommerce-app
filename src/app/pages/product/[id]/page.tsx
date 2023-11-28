@@ -1,5 +1,4 @@
 "use client";
-import ProductSlider from "@/app/components/ProductSlider";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -13,7 +12,7 @@ const viewProduct = () => {
   };
   useEffect(() => {
     getSingleProduct(params?.id);
-  });
+  }, []);
   return (
     <div className="p-2 sm:px-8 sm:py-6 w-full flex justify-center">
       {product && (
@@ -53,7 +52,6 @@ const viewProduct = () => {
           </div>
         </div>
       )}
-      {/* <ProductSlider /> */}
     </div>
   );
 };
