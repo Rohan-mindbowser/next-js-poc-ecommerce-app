@@ -6,6 +6,8 @@ import { AiOutlineShopping } from "react-icons/ai";
 import { cart } from "../context/ProductContext";
 import { MdCancel } from "react-icons/md";
 import CartProduct from "./CartProduct";
+import WishListProduct from "./WishListProduct";
+import { ToastContainer } from "react-toastify";
 
 const navLinks: { label: string; value: string }[] = [
   { label: "New & Featured", value: "/pages/latestproducts" },
@@ -14,9 +16,14 @@ const navLinks: { label: string; value: string }[] = [
 const Navbar = () => {
   const { cartProducts, wishList }: any = useContext(cart);
   const [showCartSlider, setShowCartSlider] = useState(false);
+  const [showWishList, setshowWishList] = useState(false);
 
   const showSlider = () => {
     setShowCartSlider((show) => !show);
+  };
+
+  const showWishListSlider = () => {
+    setshowWishList((show) => !show);
   };
 
   return (
@@ -48,7 +55,10 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div className="relative">
+          <div
+            className="relative cursor-pointer"
+            onClick={() => showWishListSlider()}
+          >
             <AiOutlineShopping />
             <div className="bg-red-500 absolute top-0 right-0 rounded-full w-[18px] h-[18px] text-[12px] text-white grid place-items-center translate-x-1 -translate-y-1">
               {wishList?.length}
@@ -79,7 +89,32 @@ const Navbar = () => {
             </div>
           </div>
         )}
+
+        {showWishList && (
+          <div className="absolute right-0 top-0 w-full lg:w-1/2 bg-white h-screen shadow-sm p-2 sm:p-6 overflow-y-auto z-[99999]">
+            <div className="text-4xl flex justify-end cursor-pointer">
+              <MdCancel onClick={() => showWishListSlider()} />
+            </div>
+            <div className="my-4">
+              {wishList?.map((product: any, id: any) => {
+                return (
+                  <div key={id}>
+                    <WishListProduct product={product} />
+                  </div>
+                );
+              })}
+            </div>
+            <div>
+              {wishList?.length === 0 && (
+                <div className="text-2xl font-semibold w-full h-full text-center">
+                  Products not added in the wish list
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
+      <ToastContainer />
     </>
   );
 };

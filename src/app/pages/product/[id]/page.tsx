@@ -1,14 +1,60 @@
 "use client";
+import { cart } from "@/app/context/ProductContext";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 const viewProduct = () => {
   const [product, setProduct]: any[] = useState();
+  const { cartProducts, setCartProducts, wishList, setWishList }: any =
+    useContext(cart);
+
   const params = useParams();
   const getSingleProduct = async (id: any) => {
     const data = await fetch(`https://api.escuelajs.co/api/v1/products/${id}`);
     const res = await data.json();
     setProduct(res);
+  };
+
+  const addToCart = (product: any) => {
+    const productIdx = cartProducts?.findIndex(
+      (item: any) => item.id === product?.id
+    );
+    if (productIdx === -1) {
+      setCartProducts([...cartProducts, { ...product, quantity: 1 }]);
+    } else {
+      cartProducts[productIdx].quantity++;
+      setCartProducts([...cartProducts]);
+    }
+    toast.success("Product added in cart", {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  const addToFav = (product: any) => {
+    const productIdx = wishList?.findIndex(
+      (item: any) => item.id === product?.id
+    );
+    if (productIdx === -1) {
+      setWishList([...wishList, product]);
+      toast.success("Product added in wish list", {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
   };
   useEffect(() => {
     getSingleProduct(params?.id);
@@ -28,10 +74,16 @@ const viewProduct = () => {
             <h1 className="text-xl font-semibold">{product?.title}</h1>
             <p className="text-sm">{product?.category?.name}</p>
             <p className="font-bold my-6">MRP: ${product?.price}</p>
-            <button className="px-4 py-4 text-xs font-semibold rounded-full bg-black text-white hover:bg-gray-600 w-full max-w-xs">
+            <button
+              onClick={() => addToCart(product)}
+              className="px-4 py-4 text-xs font-semibold rounded-full bg-black text-white hover:bg-gray-600 w-full max-w-xs"
+            >
               Add to Bag
             </button>
-            <button className="px-4 py-4 text-xs font-semibold rounded-full border-2 border-gray-300  text-black hover:border-black w-full max-w-xs mt-2">
+            <button
+              onClick={() => addToFav(product)}
+              className="px-4 py-4 text-xs font-semibold rounded-full border-2 border-gray-300  text-black hover:border-black w-full max-w-xs mt-2"
+            >
               <span className="flex justify-center items-center gap-1">
                 Favorite
               </span>
@@ -52,6 +104,7 @@ const viewProduct = () => {
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };
