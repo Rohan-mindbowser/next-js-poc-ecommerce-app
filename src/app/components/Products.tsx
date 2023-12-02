@@ -1,6 +1,5 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import React, { useEffect, useState } from "react";
 import Product from "./Product";
 
 const Products = () => {
@@ -8,7 +7,7 @@ const Products = () => {
 
   const getAllProducts = async () => {
     const data = await fetch(
-      "https://api.escuelajs.co/api/v1/products?offset=0&limit=36"
+      "https://api.escuelajs.co/api/v1/products?offset=0&limit=20"
     );
     const res = await data.json();
     setProducts(res);

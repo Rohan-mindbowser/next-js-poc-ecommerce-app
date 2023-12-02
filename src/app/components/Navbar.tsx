@@ -71,7 +71,7 @@ const Navbar = () => {
             <div className="text-4xl flex justify-end cursor-pointer">
               <MdCancel onClick={() => showSlider()} />
             </div>
-            <div className="my-4">
+            <div className="my-4 max-h-[75vh] overflow-y-auto">
               {cartProducts?.map((product: any, id: any) => {
                 return (
                   <div key={id}>
@@ -86,6 +86,16 @@ const Navbar = () => {
                   Products not added in the cart
                 </div>
               )}
+            </div>
+            <div className="flex justify-end mt-auto">
+              <button
+                onClick={showSlider}
+                className="px-2 py-2 sm:px-2 sm:py-2 text-xs font-semibold rounded-full bg-green-600 text-white hover:bg-gray-600 w-full max-w-xs"
+              >
+                <Link href="/pages/checkout" className="font-bold sm:text-xl">
+                  Checkout
+                </Link>
+              </button>
             </div>
           </div>
         )}

@@ -31,7 +31,7 @@ const Product = ({ product }: any) => {
   return (
     <div className="w-full flex flex-col bg-gray-50 p-2 rounded-md shadow">
       <Link href={`/pages/product/${product?.id}`}>
-        <img src={product?.images[0]} className="cursor-pointer"></img>
+        <img src={product?.images[0]} className="cursor-pointer object-cover"></img>
       </Link>
       <span className="text-xl">{product?.title}</span>
       <div className="flex justify-between items-center">
